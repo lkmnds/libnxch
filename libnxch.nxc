@@ -4,17 +4,12 @@
 */
 
 #define E	2.718281828459045235360287471352662498L
-#define PI	3.141592653589793238462643383279502884L
 
-typedef u8 unsigned char;
-typedef s8 char;
-typedef u16 unsigned int;
-typedef s16 int;
-typedef u32 unsigned long;
-typedef s32 long;
+int DRW_NORMAL = DRAW_OPT_NORMAL;
+int DRW_CLEAR = DRAW_OPT_CLEAR_WHOLE_SCREEN;
 
-#define DRW_NORMAL = DRAW_OPT_NORMAL
-#define DRW_CLEAR = DRAW_OPT_CLEAR_WHOLE_SCREEN;
+#define SENSOR_ULTRASONIC 2048
+#define SENSOR_TEMPERATURE 1024
 
 int CenterText(const string text){
 	int len = StrLen(text);
@@ -44,9 +39,23 @@ void write_text(int x, int y, string text, bool clear = false)
 	SysDrawText(dt);
 }
 
+void write_line(int y, string text, bool clear = false){
+	write_text(0, y, text, clear);
+}
+
+void write_center(int y, string text, bool clear = false){
+	int len = CenterText(text);
+	byte options = DRAW_OPT_NORMAL;
+
+	if(clear){
+		options = DRAW_OPT_CLEAR_WHOLE_SCREEN;
+	}
+
+	write_text(len, y, text, options);
+}
+
 void assert(int expression){
 	if(expression){
-		return;
 	}else{
 		while(true){
 			CenterTextOut(LCD_LINE1, "sdlib");
@@ -55,21 +64,12 @@ void assert(int expression){
 	}
 }
 
-
-int abs(int x){
-	if(x < 0){
-		return -x;
-	}else{
-		return x;
-	}
-}
-
 int floor(float x){
-	return (int)x;
+	return atoi(NumToStr(x));
 }
 
 int ceil(float x){
-	int a = (int)x;
+	int a = atoi(NumToStr(x));
 	if(a == x){
 		return a;
 	}else{
@@ -91,25 +91,26 @@ int lcm(int a, int b){
 	return a/gcd(a, b) * b;
 }
 
-int factorial(int n){
-	if((n == 0) || (n == 1)){
-		return 1;
+int factorial(int n) {
+	int f = 1;
+	for(int i=1;i<=n;i++) {
+		f *= i;
 	}
-	return n * factorial(n-1);
+	return f;
 }
 
 char init_sensor_temp(int port, byte config){
 	return ConfigureTemperatureSensor(port, config);
 }
 
-char init_sensor(int sensor_type, int port, byte config){
-	if(sensor_type == SENSOR_TEMP){
-		return ConfigureTemperatureSensor(port, config);
+void init_sensor(int sensor_type, int port, byte config){
+	if(sensor_type == SENSOR_TEMPERATURE){
+		ConfigureTemperatureSensor(port, config);
+	}else if(sensor_type == SENSOR_ULTRASONIC){
+		SetSensorUltrasonic(port);
 	}
 }
 
-void *get_sensor(int sensor_type, int port){
-	if(sensor_type == SENSOR_TEMP){
-		return SensorTemperature(port);
-	}
+task main(){
+
 }
