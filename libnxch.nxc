@@ -54,13 +54,18 @@ void write_center(int y, string text, bool clear = false){
 	write_text(len, y, text, options);
 }
 
+void lib_panic(string err){
+	while(true){
+		CenterTextOut(LCD_LINE1, "sdlib");
+		CenterTextOut(LCD_LINE2, err);
+	}
+}
+
 void assert(int expression){
 	if(expression){
+		return;
 	}else{
-		while(true){
-			CenterTextOut(LCD_LINE1, "sdlib");
-			CenterTextOut(LCD_LINE2, "ASSERT_ERROR");
-		}
+		lib_panic("ASSERT_ERROR");
 	}
 }
 
