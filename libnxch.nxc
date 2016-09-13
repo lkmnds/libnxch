@@ -56,8 +56,8 @@ void write_center(int y, string text, bool clear = false){
 
 void lib_panic(string err){
 	while(true){
-		CenterTextOut(LCD_LINE1, "sdlib");
-		CenterTextOut(LCD_LINE2, err);
+		write_center(LCD_LINE1, "[panic:lxnch]");
+		write_certer(LCD_LINE2, err);
 	}
 }
 
