@@ -115,7 +115,3 @@ void init_sensor(int sensor_type, int port, byte config){
 		SetSensorUltrasonic(port);
 	}
 }
-
-task main(){
-
-}

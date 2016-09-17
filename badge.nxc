@@ -1,0 +1,7 @@
+#include "libnxch.nxc"
+
+task main(){
+    while(true){
+        write_center(LCD_LINE2, "BADGE");
+    }
+}
