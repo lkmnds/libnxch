@@ -1,8 +1,8 @@
 all:
-	./nbc libnxch.nxc -O=out/libnxch.out -nbc=out/libnxch.nbc -L=out/libnxch.lst -Y=out/libnxch.sym -safecall -sm-
+	./nbc badge.nxc -O=out/badge.out -nbc=out/badge.nbc -L=out/badge.lst -Y=out/badge.sym -safecall -sm-
 
 upload:
-	./nbc -d libnxch.nxc -O=out/libnxch.out -nbc=out/libnxch.nbc -L=out/libnxch.lst -Y=out/libnxch.sym -safecall
+	./nbc -d badge.nxc -O=out/badge.out -nbc=out/badge.nbc -L=out/badge.lst -Y=out/badge.sym -safecall
 
 run:
-	./nbc -r libnxch.nxc -O=out/libnxch.out -nbc=out/libnxch.nbc -L=out/libnxch.lst -Y=out/libnxch.sym -safecall
+	./nbc -r badge.nxc -O=out/badge.out -nbc=out/badge.nbc -L=out/badge.lst -Y=out/badge.sym -safecall

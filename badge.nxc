@@ -8,15 +8,26 @@ task write_badge(){
     }
 }
 
+task make_sound(){
+    for(int i=0;i<5;i++){
+        if(i%2){
+            PlayTone(TONE_C5, 500);
+        }else{
+            PlayTone(TONE_C6, 500);
+        }
+    }
+}
+
 task minigame(){
     while(true){
-        if(ButtonPressed(BTN1)){
+        if(ButtonPressed(BTN1, false)){
+            Precedes(make_sound);
+            continue;
+        }else if(ButtonPressed(BTN2, false)){
             break;
-        }else if(ButtonPressed(BTN2)){
+        }else if(ButtonPressed(BTN3, false)){
             break;
-        }else if(ButtonPressed(BTN3)){
-            break;
-        }else if(ButtonPressed(BTN4)){
+        }else if(ButtonPressed(BTN4, false)){
             break;
         }else{
             lib_panic("BUTTON_UNDEF");
@@ -25,5 +36,5 @@ task minigame(){
 }
 
 task main(){
-    Precedes(write_badge);
+    Precedes(write_badge, minigame);
 }
