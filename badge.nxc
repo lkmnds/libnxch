@@ -1,7 +1,29 @@
 #include "libnxch.nxc"
 
-task main(){
+#define NAME "Luna Mendes"
+
+task write_badge(){
     while(true){
-        write_center(LCD_LINE2, "BADGE");
+        write_center(LCD_LINE2, NAME);
     }
+}
+
+task minigame(){
+    while(true){
+        if(ButtonPressed(BTN1)){
+            break;
+        }else if(ButtonPressed(BTN2)){
+            break;
+        }else if(ButtonPressed(BTN3)){
+            break;
+        }else if(ButtonPressed(BTN4)){
+            break;
+        }else{
+            lib_panic("BUTTON_UNDEF");
+        }
+    }
+}
+
+task main(){
+    Precedes(write_badge);
 }
